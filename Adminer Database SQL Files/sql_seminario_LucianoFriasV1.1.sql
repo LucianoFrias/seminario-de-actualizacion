@@ -1,4 +1,4 @@
--- Adminer 4.8.1 MySQL 8.0.28 dump
+-- Adminer 4.8.1 MySQL 8.0.29 dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -6,13 +6,19 @@ SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `seminario_de_actualizacion`;
-CREATE DATABASE `seminario_de_actualizacion` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE `seminario_de_actualizacion` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `seminario_de_actualizacion`;
 
 DELIMITER ;;
 
 CREATE PROCEDURE `addUserToGroup`(IN `id_user` tinyint, IN `id_target_group` tinyint)
 INSERT INTO group_member(id_user,id_group) VALUES( id_user, id_target_group );;
+
+CREATE PROCEDURE `changeUserGroup`(IN `id` int(11), IN `new_group_id` int(3))
+UPDATE group_member SET id_group = new_group_id  WHERE id = id_user;;
+
+CREATE PROCEDURE `changeUserPassword`(IN `user_id` int(11), IN `new_password` varchar(45))
+UPDATE user SET password = new_password WHERE id = user_id;;
 
 CREATE PROCEDURE `createUser`(IN `name` varchar(45), IN `password` varchar(45))
 BEGIN
@@ -35,6 +41,9 @@ END;;
 CREATE PROCEDURE `deleteUser`(IN `id` int(11))
 DELETE FROM user WHERE id = user.id;;
 
+CREATE PROCEDURE `readAllGroupMembers`()
+SELECT * from group_member;;
+
 CREATE PROCEDURE `readAllUsers`()
 SELECT * FROM user;;
 
@@ -51,8 +60,8 @@ DELIMITER ;
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
@@ -60,8 +69,8 @@ CREATE TABLE `action` (
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
@@ -92,20 +101,22 @@ CREATE TABLE `group_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `group_member` (`id_user`, `id_group`) VALUES
-(5,	3);
+(5,	3),
+(12,	2);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user` (`id`, `name`, `password`) VALUES
 (5,	'Luciano',	'123456'),
-(6,	'RandomPerson123',	'34523');
+(6,	'RandomPerson123',	'34523'),
+(12,	'CachoCamionero',	'mateamargo');
 
 DROP TABLE IF EXISTS `user_information`;
 CREATE TABLE `user_information` (
@@ -115,4 +126,4 @@ CREATE TABLE `user_information` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 
--- 2022-06-27 05:25:48
+-- 2022-06-29 21:51:42
