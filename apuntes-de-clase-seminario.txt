@@ -1,0 +1,19 @@
+Mecanismos de Sesión de Usuario
+
+1 - Autentificación Continua: 
+
+Ante cualquier acción del sistema, el usuario siempre va a pasar sus datos de login. 
+Cada acción que se ejecuta utiliza la autentificación antes de realizarse.
+(Pasar usuario/password todo el tiempo)
+
+2 - Session Token: 
+En lugar de que el HTTP conteste al acceso, se contesta con una llave, que se guarda en la sesión que se convierte en lo que se pasa entre el servidor y el usuario.
+
+En ambos casos, se puede controlar la duración de las interacciones. 
+En el primer caso, solo se requiere que los datos del usuario sean válidos. 
+En cambio, a los token se les puede asignar una duración limitada. 
+La fecha de vencimiento se puede reactualizar en función de cuanto tiempo permanece iniciada la sesión.
+
+
+1 - Desarrollar una SQLQuery que permita validar la existencia e igualdad de un usuario y contraseña. [X]
+2 - Construir el archivo "auth.php" que permita invocar el procedimiento del punto 1.
