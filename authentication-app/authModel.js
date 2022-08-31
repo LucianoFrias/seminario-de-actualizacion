@@ -1,0 +1,6 @@
+class AuthModel
+{
+
+}
+
+export { AuthModel }
