@@ -1,0 +1,43 @@
+#loginContainer
+{
+    width: 13%;
+    text-align: center;
+    border-style: solid;
+    border-color: blue;
+    padding: 50px;
+    border-radius: 20px;
+    margin: auto;
+}
+
+#Username, #Password{
+    border-radius:5px;
+    margin: 5px;
+    color: teal;
+    background: turquoise;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.InputBox1, .InputBox2
+{
+   border-radius:5px;
+   margin:10px;
+   color: red;
+   border: 1px solid black;
+
+}
+
+
+#LoginBtn
+{
+    display: block;
+    border: none;
+    background-color: transparent;
+    border: 1px solid black;
+    padding: 5px 15px;
+    border-radius: 20px;
+    outline: green;
+    color: blueviolet;
+    margin: auto;
+    cursor: pointer;
+
+}
