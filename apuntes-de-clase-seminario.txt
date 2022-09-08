@@ -17,3 +17,24 @@ La fecha de vencimiento se puede reactualizar en función de cuanto tiempo perma
 
 1 - Desarrollar una SQLQuery que permita validar la existencia e igualdad de un usuario y contraseña. [X]
 2 - Construir el archivo "auth.php" que permita invocar el procedimiento del punto 1.
+
+7 / 9 S.A - Mecanismos de Autentificación
+
+. Autentificación Continua
+. Claves de Sesión: 
+
+1 - Cuando alguien hace clic en el 'login', en el lado del servidor se ejecuta la respuesta de forma distinta. 
+2 - El servidor llama a la DB para pedirle que genere una llave, y que le ponga una fecha de vencimiento, y luego esa clave se devuelve como un token de sesión.
+3 - La vista guarda el token.
+4 - Cuando el cliente ejecuta cualquier otra acción, debe hacer la petición enviando el token.
+
+Crear sesión para Usuario ( username, password / id_user)
+{
+
+id = authenticateUser ();
+ if ( id != NULL)
+ {
+   generateUserToken (id, currentDate [fecha de creación], expirationDate [límite del período de validez]);
+ }
+
+}
