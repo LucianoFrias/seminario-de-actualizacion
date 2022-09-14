@@ -7,6 +7,7 @@ class AuthView extends HTMLElement
 
         this.formElement = document.createElement('form');
         this.formElement.id = 'loginContainer';
+        this.formElement.method = 'post';
 
         this.usernameH1 = document.createElement('h1');
         this.usernameH1.id = 'Username';
@@ -17,6 +18,7 @@ class AuthView extends HTMLElement
         this.usernameInput.type = 'text';
         this.usernameInput.name = 'username';
         this.usernameInput.id = 'username';
+        this.usernameInput.placeholder = "Your username..."
 
         this.passwordH1 = document.createElement('h1');
         this.passwordH1.id = 'Password';
@@ -27,6 +29,7 @@ class AuthView extends HTMLElement
         this.passwordInput.type = 'password';
         this.passwordInput.name = 'password';
         this.passwordInput.id = 'password';
+        this.passwordInput.placeholder = "Your password..."
 
         this.submitBtn = document.createElement('button');
         this.submitBtn.id = 'LoginBtn';

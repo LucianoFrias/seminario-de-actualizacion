@@ -1,29 +1,47 @@
+
+
 #loginContainer
 {
-    width: 13%;
+    width: 30vw;
+    padding: 25px 0;
     text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-style: solid;
     border-color: blue;
-    padding: 50px;
     border-radius: 20px;
     margin: auto;
+    box-shadow: 5px 5px 5px black;
 }
 
 #Username, #Password{
     border-radius:5px;
     margin: 5px;
     color: teal;
-    background: turquoise;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .InputBox1, .InputBox2
 {
    border-radius:5px;
+   padding: 5px;
    margin:10px;
-   color: red;
    border: 1px solid black;
+   transition: all 0.5s;
 
+}
+
+.InputBox2
+{
+    margin-bottom: 20px;
+}
+
+.InputBox1:focus, .InputBox2:focus
+{
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 
@@ -33,11 +51,20 @@
     border: none;
     background-color: transparent;
     border: 1px solid black;
-    padding: 5px 15px;
+    padding: 7px 25px;
     border-radius: 20px;
     outline: green;
     color: blueviolet;
     margin: auto;
+    margin-bottom: 10px;
     cursor: pointer;
+    transition: 0.5s background-color;
 
+}
+
+#LoginBtn:hover
+{
+    background-color: blueviolet;
+    color: #fff;
+    border: 1px solid blueviolet;
 }
