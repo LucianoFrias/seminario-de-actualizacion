@@ -5,6 +5,10 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP DATABASE IF EXISTS `seminario_de_actualizacion`;
+CREATE DATABASE `seminario_de_actualizacion` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `seminario_de_actualizacion`;
+
 DELIMITER ;;
 
 DROP PROCEDURE IF EXISTS `addUserToGroup`;;
