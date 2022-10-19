@@ -3,8 +3,8 @@
 include_once( "./database.php");
 
 
-$json_body = file_get_contents('php://input');
-$object = json_decode($json_body);
+//$json_body = file_get_contents('php://input');
+//$object = json_decode($json_body);
 
 $password = '123456' // Hardcoded
 $username = 'Luciano'; // Hardcoded

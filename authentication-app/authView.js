@@ -1,9 +1,12 @@
+import { AuthController } from "./authController.js";
+
 class AuthView extends HTMLElement
 {
     constructor(model)
     {
         super();
-        this.innerModel = model;
+        this.innerController = model;
+        this.innerController = new AuthController(this.innerController, this);
 
         this.formElement = document.createElement('form');
         this.formElement.id = 'loginContainer';
@@ -35,6 +38,8 @@ class AuthView extends HTMLElement
         this.submitBtn.id = 'LoginBtn';
         this.submitBtn.type = 'submit';
         this.submitBtn.innerText = 'Login';
+        this.submitBtn.addEventListener('click', this.innerController.getData(
+            this.usernameInput.value, this.passwordInput.value))
 
     }
 
