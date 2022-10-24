@@ -3,11 +3,11 @@
 include_once( "./database.php");
 
 
-//$json_body = file_get_contents('php://input');
-//$object = json_decode($json_body);
+$json_body = file_get_contents('php://input');
+$object = json_decode($json_body);
 
-$password = '123456' // Hardcoded
-$username = 'Luciano'; // Hardcoded
+$username = $object->username;
+$password = $object->password; 
 
 try
 {
@@ -20,8 +20,8 @@ try
 	$SQLStatement->execute();
 
 	$status = array( status=>'ok', description=>'Usuario Conectado Exitosamente!' );
-	$db_response = $SQLStatement->fetchAll(PDO::FETCH_ASSOC /* <- Ver bien como es el nombre */);
-	$db_user = $db_response[1]["id"];
+	$db_response = $SQLStatement->fetchAll(PDO::FETCH_ASSOC);
+	$db_user = $db_response[0]["id"];
 
 
 	$response_client = null; 

@@ -38,8 +38,8 @@ class AuthView extends HTMLElement
         this.submitBtn.id = 'LoginBtn';
         this.submitBtn.type = 'submit';
         this.submitBtn.innerText = 'Login';
-        this.submitBtn.addEventListener('click', this.innerController.getData(
-            this.usernameInput.value, this.passwordInput.value))
+        this.submitBtn.addEventListener('click', () => {this.innerController.getData(
+            this.usernameInput.value, this.passwordInput.value)})
 
     }
 

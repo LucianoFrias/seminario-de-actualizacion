@@ -5,14 +5,14 @@ include_once( "./database.php");
 $json_body = file_get_contents('php://input');
 $object = json_decode($json_body);
 
-$password = $object->password;
 $username = $object->username;
+$password = $object->password;
 
 function createUserSession( $id_user )
 {
 	$token = hash('sha256', $username.$password);
 
-	$SQLStatement = $connection->prepare("CALL `createUserSession`(:id_user, :token)");
+	$SQLStatement = $connection->prepare("CALL `create_user_session`(:id_user, :token)");
 	$SQLStatement->bindParam( ':id_user', $id_user );
 	$SQLStatement->bindParam( ':token', $token );
 	$SQLStatement->execute();
@@ -26,7 +26,7 @@ try
 	//ANTES de enviar el comando SQL al motor de base de datos.
 
 	//PRIMER PASO: Validar la existencia del usuario y su contraseña
-	$SQLStatement = $connection->prepare("CALL `validateUser`(:username, :password)");
+	$SQLStatement = $connection->prepare("CALL `auth_user`(:username, :password)");
 	$SQLStatement->bindParam( ':username', $username );
 	$SQLStatement->bindParam( ':password', $password );
 	$SQLStatement->execute();
@@ -37,6 +37,8 @@ try
 
 	$response_client = null;
 
+
+	//Si la base de datos encuentra el valor buscado...
 	if ( count($db_response) != 0 )
 	{
 		//caso favorable (el array no está vacío y se espera un array con la estructura de la respuesta que genera el procedimiento)
@@ -44,7 +46,7 @@ try
 
 		$token = hash('sha256', $username.$password);
 
-		$SQLStatement2 = $connection->prepare("CALL `createUserSession`(:id_user, :token)");
+		$SQLStatement2 = $connection->prepare("CALL `create_user_session`(:id_user, :token)");
 		$SQLStatement2->bindParam( ':id_user', $id_user );
 		$SQLStatement2->bindParam( ':token', $token );
 		$SQLStatement2->execute();

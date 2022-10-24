@@ -8,7 +8,9 @@ class AuthModel
 
     authenticate( data )
     {
-        return fetch('./loginToken.php').then()        
+        return fetch('./loginToken.php')
+        .then(response => response.json())
+        .then(data => console.log(data))        
     }
 
 }
