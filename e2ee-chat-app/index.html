@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bienvenidos a Guasap</h1>
+    <button id="btnConnect">Conectar</button>
+    <button>Desconectar</button>
+
+    <br>
+
+    <h4>Usuario A</h4>
+    <textarea>
+
+
+    </textarea>
+
+    <br>
+    <input type="text" name=" ">
+    <button>Enviar</button>
+
+    <h4>Usuario B</h4>
+    <textarea>
+
+
+    </textarea>
+
+    <br>
+    <input type="text" name="">
+    <button>Enviar</button>
+    
+</body>
+
+<script type = "text/javascript">
+
+ function connect()
+ {
+    let data =
+    {
+       method: 'POST',
+       body: JSON.stringify(null)
+    };
+    
+    fetch("./connect_users.php", data)
+    .then(response => response.json())
+    .then(response =>
+    {
+      sessionStorage.setItem('chatKey', response);
+      alert('Connected Successfully!');
+    
+    });
+
+ }
+
+ function main()
+ {
+    btnConnect.addEventListener('click',()=>connect());
+ }
+
+ window.addEventListener('load', ()=>main());
+
+</script>
+</html>
