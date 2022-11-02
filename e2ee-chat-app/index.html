@@ -20,8 +20,8 @@
     </textarea>
 
     <br>
-    <input type="text" name=" ">
-    <button>Enviar</button>
+    <input id="fldMessage" type="text" name=" " value="">
+    <button id="btnSend">Enviar</button>
 
     <h4>Usuario B</h4>
     <textarea>
@@ -30,8 +30,8 @@
     </textarea>
 
     <br>
-    <input type="text" name="">
-    <button>Enviar</button>
+    <input id="fldMessage" type="text" name="" value="">
+    <button id="btnSend">Enviar</button>
     
 </body>
 
@@ -56,9 +56,59 @@
 
  }
 
+ function getMessageEncoding(){
+
+   const messageBox = document.querySelector(".rsa-oaep #message");
+ }
+
+ function encryptMessage(publicKey, message)
+ {
+
+   let enc = new TextEncoder();
+   let tmp = enc.encode(message);
+
+   return window.crypto.subtle.encrypt(
+        
+      {
+         name: "RSA-OAEP",
+      },
+
+      publicKey,
+      tmp
+
+   );
+}
+
+function decryptMessage(publicKey, encryptedMessage)
+{
+   // Mismo codigo que encryptMessage() pero esta vez para desencriptar.
+   // USAR MDN (CryptoSubtle) para desencriptar.
+}
+
+ function send()
+ {
+    let data =
+    {
+     method: 'POST',
+     body: JSON.strngify (encryptMessage(fldMessage.value))
+
+
+    };
+
+    fetch("./send_message.php",data)
+
+
+ }
+
+ function updateChatView()
+ {
+      
+ }
+
  function main()
  {
     btnConnect.addEventListener('click',()=>connect());
+    btnSend.addEventListener('click', ()=>send())
  }
 
  window.addEventListener('load', ()=>main());
