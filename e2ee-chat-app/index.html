@@ -14,7 +14,7 @@
     <br>
 
     <h4>Usuario A</h4>
-    <textarea>
+    <textarea class="textBox">
 
 
     </textarea>
@@ -24,7 +24,7 @@
     <button id="btnSend">Enviar</button>
 
     <h4>Usuario B</h4>
-    <textarea>
+    <textarea class="textBox">
 
 
     </textarea>
@@ -81,8 +81,20 @@
 
 function decryptMessage(publicKey, encryptedMessage)
 {
-   // Mismo codigo que encryptMessage() pero esta vez para desencriptar.
-   // USAR MDN (CryptoSubtle) para desencriptar.
+
+   let dec = new TextDecoder();
+   let tmp = dec.decode(encryptedMessage);
+
+   return window.crypto.subtle.decrypt(
+
+      {
+         name: "RSA-OAEP",
+      },
+
+      publicKey,
+      tmp
+
+   );
 }
 
  function send()
@@ -102,11 +114,23 @@ function decryptMessage(publicKey, encryptedMessage)
 
  function updateChatView()
  {
-      
+      let textBoxes = document.getElementsByClassName("textBox");
+      let data =
+      {
+         method:'POST',
+         body: JSON.stringify(decryptMessage(fldMessage.value))
+      };
+     
+      fetch("./get_message.php", data)
+      .then(response => response.json())
+      .then(data => textBoxes.appendChild(data));
  }
 
  function main()
  {
+   let btnConnect = document.getElementById("btnConnect");
+   let btnSend = document.getElementById("btnSend");
+
     btnConnect.addEventListener('click',()=>connect());
     btnSend.addEventListener('click', ()=>send())
  }
